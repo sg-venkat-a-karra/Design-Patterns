@@ -35,15 +35,11 @@ class Traveller extends Person {
     return !!this.location;
   };
   getHomeLocation = () => {
-    if (this.hasHomeLocation()) {
-      return this.location;
-    }
+    return this.hasHomeLocation() ? this.location : "free world";
   };
   getDescription = () => {
     let description = `Hi I am ${this.name}. ${super.getDescription()}`;
-    description += `I live in ${
-      this.hasHomeLocation() ? this.location : "free world"
-    }`;
+    description += `I live in ${this.getHomeLocation()}`;
     return description;
   };
 }
@@ -53,6 +49,7 @@ const p1 = new Student("Avinash", 30, "Electronics And Communications");
 const p2 = new Student();
 const p3 = new Traveller("Andrew Mead", 28);
 const p4 = new Traveller("Indra", "7 months", "Madhapur");
+const human = new Person();
 const p3HasLocation = p3.hasHomeLocation();
 
 // ==============Output===============
@@ -65,3 +62,4 @@ console.log(p3.getHomeLocation());
 console.log(p4.getHomeLocation());
 console.log(p3.getDescription());
 console.log(p4.getDescription());
+console.log(human.getDescription());
