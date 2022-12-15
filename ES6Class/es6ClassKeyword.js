@@ -10,12 +10,13 @@ class Person {
     return `${this.name} is ${this.age} years old`;
   }
 }
+
+// Super method is added to acces the values from the parent class
 class Student extends Person {
   constructor(name, age, major) {
     super(name, age);
     this.major = major;
   }
-  hasMajor() {}
   getDescription = () => {
     const description = super.getDescription();
     console.log(description);
