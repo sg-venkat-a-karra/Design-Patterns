@@ -13,14 +13,12 @@ class Person {
 
 // Super method is added to acces the values from the parent class
 class Student extends Person {
-  constructor(name, age, major) {
+  constructor(name, age, major = "not yet declared") {
     super(name, age);
     this.major = major;
   }
   getDescription = () => {
-    const description = super.getDescription();
-    console.log(description);
-    return description;
+    return `${super.getDescription()} with major ${this.major}`;
   };
 }
 
