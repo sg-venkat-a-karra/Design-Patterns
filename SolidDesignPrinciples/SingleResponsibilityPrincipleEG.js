@@ -1,59 +1,40 @@
-const fs = require("fs");
-
-class Journal {
-  constructor() {
-    this.entries = {};
+//bad
+class UserSettings {
+  constructor(user) {
+    this.user = user;
   }
 
-  addEntry(text) {
-    let c = ++Journal.count;
-    let entry = `${c}: ${text}`;
-    this.entries[c] = entry;
-    return c;
+  changeSettings(settings) {
+    if (this.verifyCredentials()) {
+      //..
+    }
   }
 
-  removeEntry(index) {
-    delete this.entries[index];
-  }
-
-  toString() {
-    return Object.values(this.entries).join("\n");
-  }
-
-  // save(filename)
-  // {
-  //   fs.writeFileSync(filename, this.toString());
-  // }
-  //
-  // load(filename)
-  // {
-  //   //
-  // }
-  //
-  // loadFromUrl(url)
-  // {
-  //   //
-  // }
-}
-Journal.count = 0;
-
-class PersistenceManager {
-  preprocess(j) {
-    //
-  }
-
-  saveToFile(journal, filename) {
-    fs.writeFileSync(filename, journal.toString());
+  verifyCredentials() {
+    //..
   }
 }
 
-let j = new Journal();
-j.addEntry("I cried today.");
-j.addEntry("I ate a bug.");
-console.log(j.toString());
+//Good
+class UserAuth {
+  constructor(user) {
+    this.user = user;
+  }
 
-let p = new PersistenceManager();
-let filename = "c:/temp/journal.txt";
-p.saveToFile(j, filename);
+  verifyCredentials() {
+    //..
+  }
+}
 
-// separation of concerns
+class UserSettings {
+  cosntructor(user) {
+    this.user = user;
+    this.auth = new UserAuth(user);
+  }
+
+  changeSettings(settings) {
+    if (this.auth.verifyCredintials()) {
+      //..
+    }
+  }
+}
